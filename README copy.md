@@ -6,6 +6,9 @@ Creates the following resources:
 1 VM called Practice1-VM1 that is in Practice1-RG
 1 network interface called Practice1-VM1-NIC that is attached to Practice1-VM1
 1 public IP called Practice1-PublicIP1 that is attached to Practice1-VM1-NIC
+1 network security group called Practice1-NSG1
+1 storage account with a randomized name
+
 
 To SSH to the VM
 Create the private key file
