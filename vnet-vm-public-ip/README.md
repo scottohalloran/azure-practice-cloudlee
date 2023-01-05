@@ -9,12 +9,11 @@
 ### 1 network security group called Practice1-NSG1
 ### 1 storage account with a randomized name
 
-
-To SSH to the VM from a Mac or Linux shell:
-Create the private key file:
-terraform output -raw tls_private_key > id_rsa
-Set its permissions
-chmod 400 id_rsa
-ssh -i id_rsa adminuser@Practice1-PublicIP1
+#### To SSH to the VM from a Mac or Linux shell:
+#### Create the private key file:
+#### terraform output -raw tls_private_key > id_rsa
+#### Set its permissions
+#### chmod 400 id_rsa
+#### ssh -i id_rsa adminuser@Practice1-PublicIP1
 
 ![Azure Diagram](./vnet-vm-public-ip.jpg "Azure Diagram").
