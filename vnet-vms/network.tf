@@ -28,23 +28,17 @@ resource "azurerm_subnet" "practice2-subnet2" {
 }
 
 
-# Create Network Security Group and rule
+# Create Network Security Groups
 resource "azurerm_network_security_group" "practice2_nsg1" {
   name                = "Practice2-NSG1"
   location            = azurerm_resource_group.practice2-rg.location
   resource_group_name = azurerm_resource_group.practice2-rg.name
+}
 
-  security_rule {
-    name                       = "SSH"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+resource "azurerm_network_security_group" "practice2_nsg1" {
+  name                = "Practice2-NSG2"
+  location            = azurerm_resource_group.practice2-rg.location
+  resource_group_name = azurerm_resource_group.practice2-rg.name
 }
 
 # Create network interfaces
@@ -84,18 +78,13 @@ resource "azurerm_network_interface" "practice2_vm3_nic" {
     }
 }
 
-# Connect the security group to the network interfaces
-resource "azurerm_network_interface_security_group_association" "practice2_sga1" {
-  network_interface_id      = azurerm_network_interface.practice2_vm1_nic.id
+# Connect the security groups to the subnets
+resource ""azurerm_subnet_network_security_group_association"" "practice2_sga1" {
+ subnet_id     = azurerm_network_security_group.practice2-subnet1.id
   network_security_group_id = azurerm_network_security_group.practice2_nsg1.id
+}
+resource ""azurerm_subnet_network_security_group_association"" "practice2_sga2" {
+ subnet_id     = azurerm_network_security_group.practice2-subnet2.id
+  network_security_group_id = azurerm_network_security_group.practice2_nsg2.id
 }
 
-resource "azurerm_network_interface_security_group_association" "practice2_sga2" {
-  network_interface_id      = azurerm_network_interface.practice2_vm2_nic.id
-  network_security_group_id = azurerm_network_security_group.practice2_nsg1.id
-}
-
-resource "azurerm_network_interface_security_group_association" "practice2_sga3" {
-  network_interface_id      = azurerm_network_interface.practice2_vm3_nic.id
-  network_security_group_id = azurerm_network_security_group.practice2_nsg1.id
-}

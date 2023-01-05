@@ -10,10 +10,11 @@
 #### 1 storage account with a randomized name
 
 #### To SSH to the VM from a Mac or Linux shell:
-#### Create the private key file:
+#### 1, Create the private key file:
 #### terraform output -raw tls_private_key > id_rsa
-#### Set its permissions
+#### 2. Set its permissions
 #### chmod 400 id_rsa
+#### Specify the rsa key in the SSH command
 #### ssh -i id_rsa adminuser@Practice1-PublicIP1
 
 ![Azure Diagram](./vnet-vm-public-ip.jpg "Azure Diagram").
